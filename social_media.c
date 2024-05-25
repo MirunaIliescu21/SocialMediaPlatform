@@ -30,6 +30,8 @@ void init_tasks(void)
 
 /**
  * Entrypoint of the program, compiled with different defines for each task
+ * In the main function, the data structures that we will need are initialized
+ * and at the end, the memory is freed after the completion of tasks.
 */
 int main(void)
 {

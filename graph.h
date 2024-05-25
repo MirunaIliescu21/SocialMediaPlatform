@@ -37,7 +37,16 @@ int compare_ints(void *a, void *b);
 
 /**
  * Finds the minimum path between two nodes in a graph using BFS.
- *
+ * Create and initialize arrays to keep track of distances, parents,
+ * and states of nodes.
+ * Return -1 if the graph is null.
+ * Initialize BFS: Create a queue, enqueue the source node, and set its
+ * state and distance.
+ * BFS Loop: Process nodes in the queue, updating distances and states for
+ * each neighboring node.
+ * If the destination node has no parent, there is no path.
+ *  Return the calculated path length.
+ * Cleanup: Free allocated memory and return the result.
  * @param graph - The graph in which to find the path.
  * @param src - The source node.
  * @param dest - The destination node.

@@ -104,25 +104,6 @@ int search_lca(int *euler_vector, int *level_vector,
 	return lca_id;
 }
 
-int count_tree_nodes_recursive(g_node_t *g_node) {
-	if (!g_node)
-		return 0;
-
-	int count = 1;
-
-	for (int i = 0; i < g_node->n_children; i++)
-		count += count_tree_nodes_recursive(g_node->children[i]);
-
-	return count;
-}
-
-int count_tree_nodes(g_tree_t *g_tree) {
-	if (!g_tree)
-		return 0;
-
-	return count_tree_nodes_recursive(g_tree->root);
-}
-
 void common_repost(tree_post_manager *post_manager, int post_id,
 				   int repost_id_1, int repost_id_2)
 {

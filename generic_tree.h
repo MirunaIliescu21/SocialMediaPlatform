@@ -133,6 +133,34 @@ g_node_t *get_the_parent_recursive(g_node_t *node, int node_id,
 g_node_t *get_the_parent(g_tree_t *tree, int node_id);
 
 /**
+ * @brief Counts the number of nodes in a subtree recursively.
+ * Base Case: If the current node is NULL, the function returns 0,
+ * indicating that there are no nodes.
+ * For each node, increment the count by 1, representing the current node.
+ * Recursively call the function for each child node and add their counts
+ * to the total count.
+ * After processing all children, return the total count, which represents
+ * the number of nodes in the tree.
+ *
+ * @param g_node The root node of the subtree.
+ * @return The number of nodes in the subtree.
+ */
+int count_tree_nodes_recursive(g_node_t *g_node);
+
+/**
+ * @brief Counts the number of nodes in a tree.
+ * Base Case: If the input tree pointer g_tree is NULL, the function returns 0,
+ * indicating that there are no nodes in the tree.
+ * If the input tree is not NULL, the function calls the
+ * count_tree_nodes_recursive function with the root node of the tree as the
+ * starting point for counting nodes.
+ *
+ * @param g_tree The tree to count the nodes of.
+ * @return The number of nodes in the tree.
+ */
+int count_tree_nodes(g_tree_t *g_tree);
+
+/**
  * @brief Recursively deletes a subtree starting from the given node.
  *
  * @param node The node to start deleting from.

@@ -132,6 +132,25 @@ g_node_t *get_the_parent(g_tree_t *tree, int node_id)
 	return get_the_parent_recursive(tree->root, node_id, NULL);
 }
 
+int count_tree_nodes_recursive(g_node_t *g_node) {
+	if (!g_node)
+		return 0;
+
+	int count = 1;
+
+	for (int i = 0; i < g_node->n_children; i++)
+		count += count_tree_nodes_recursive(g_node->children[i]);
+
+	return count;
+}
+
+int count_tree_nodes(g_tree_t *g_tree) {
+	if (!g_tree)
+		return 0;
+
+	return count_tree_nodes_recursive(g_tree->root);
+}
+
 void delete_subtree_recursively(g_node_t *node,
 								void (*free_value_function)(void *))
 {
