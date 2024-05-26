@@ -168,6 +168,10 @@ void sort_friends_by_id(friends_info *friends_vector, int n_friends);
  * Adjust the n_remaining_friends count and recalculate connections.
  *
  * Sort the friends_vector array again based on the updated connection counts.
+ * (Each time a friend is removed from the friends_vector, all connections
+ * that this particular friend had with the remaining friends
+ * must also be removed, so it's essential to recalculate the connections
+ * and resort the friends vector each time.)
  *
  * Print the names of the users in the closest friend group for the given user.
  * Free the allocated memory for the frequency array and the friends_vector.

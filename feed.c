@@ -152,8 +152,6 @@ void common_groups(list_graph_t *graph, char *name)
 	int user_id = get_user_id(name);
 	linked_list_t *friends_list = lg_get_neighbours(graph, user_id);
 
-	// asta e un vector cu care ne asiguram ca luam in calcul
-	// doar elementele din clica(adica doar prietenii lui user_id)
 	int *frequency = calloc(MAX_PEOPLE, sizeof(int));
 	DIE(!frequency, "calloc failed\n");
 	// asta e un vector cu toti prietenii lui user_id
@@ -191,7 +189,6 @@ void common_groups(list_graph_t *graph, char *name)
 			n_remaining_friends = i + 1;
 			break;
 		}
-		// recalculam nr de conexiuni si resortam vectorul
 		linked_list_t *friends__of_friends_list =
 		lg_get_neighbours(graph, friends_vector[i].id);
 		ll_node_t *current_friend_of_friend = friends__of_friends_list->head;
