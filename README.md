@@ -1,100 +1,88 @@
-### Echipa tema 3 SD:
-* robert_fabian.tudor
-* miruna.iliescu
+# Assignment 3
 
-<br />
+## Description
 
-## Tema 3
+The purpose of this assignment is to understand and develop a social media platform that combines cloud storage functionality, friend network management, and post sharing. This involves implementing tree data structures and specific algorithms that allow users to add and manage friends, create and interact with posts, and generate a personalized social media feed.
 
-### Descriere:
+---
 
-* Scopul acestei teme este de a înțelege și de a dezvolta o platformă de social media care combină funcționalități de stocare în cloud, gestionarea rețelelor de prieteni și partajarea postărilor. Aceasta presupune implementarea unor structuri de date arborescende, dar și a unor algoritmi specific realizați pentru a permite utilizatorilor să adauge și să gestioneze prieteni, să creeze și să interacționeze cu postări și să genereze un feed de social media personalizat.
+## __Explanations:__
 
-<br />
+### Task 1 - Friendship Network
 
-## __Explicații:__
+This task involves implementing the necessary functionalities for managing a friendship network on a social media platform (adding a friend, removing a friend, calculating the minimum graph distance between two friends, generating friend suggestions, displaying mutual friends, showing a user’s friend count, or displaying the friend with the most connections between a given user and their friends).
 
-## Task 1 - Rețea de prietenie
-* Acest task implică implementarea funcționalităților necesare pentru gestionarea unei rețele de prietenie într-o platformă de social media
-(adăugarea unui prieten, eliminarea unui prieten, calcularea distanței minime din graf dintre 2 prieteni, generarea de sugestii de prieteni, afișarea prietenilor comuni, afișarea numărului de prieteni al unui utilizator sau afișarea prietenului cu cele mai multe conexiuni dintre utilizatorul dat și prietenii săi).
+#### suggestions
+* This function identifies friends-of-friends for the specified user who are not already friends with them.
+* First, it retrieves the user’s unique ID based on their name. Then, a frequency array is allocated to keep track of potential friend suggestions. The user's friend list is accessed, and for each friend, their list of friends is checked, marking all the user’s friends-of-friends in the frequency array.
+* At the end, the user and their current friends are excluded from the suggestions. If there are valid suggestions, they are displayed; otherwise, it indicates that there are no available suggestions for that user.
 
-### suggestions 
-* Această funcție identifică prietenii prietenilor utilizatorului primti ca parametru care nu sunt deja prieteni cu acesta.
-* La început, se obține ID-ului unic asociat utilizatorului pe baza numelui său. Se alocă apoi un vector de frecvență pentru a ține evidența potențialelor sugestii de prieteni. Se accesează lista de prieteni a utilizatorului, iar pentru fiecare prieten din această listă, se obține la rândul său lista de prieteni, marcând astfel toți prietenii pritenilor utilizatorului în array-ul de frecvență.
-* La final, utilizatorul și prietenii săi curenți sunt excluși din aceste sugestii, iar dacă există sugestii valide, acestea sunt afișate, în caz contrar, se indică faptul că nu există sugestii disponibile pentru utilizatorul respectiv.
+#### get_distance
+* This function calculates and displays the shortest distance between two users in a social network. It uses a breadth-first search algorithm to determine the minimum number of steps needed to reach from one user to the other.
+* First, it retrieves the unique identifiers for the two users based on their names. Then, it calls the `min_path` function to calculate the shortest distance between the two users (the `min_path` function was created in SDA lab 7 with slight modifications; comments regarding its functionality are found in the `graph.h` file). If a path exists between the two users, the distance is displayed; otherwise, it indicates that there is no path between them.
 
-### get_distance
-* Această funcție are rolul de a calcula și de a afișa distanța cea mai scurtă între doi utilizatori dintr-o rețea socială. Aceasta utilizează algoritmul de căutare în lățime pentru a determina numărul minim de pași necesari pentru a ajunge de la un utilizator la celălalt.
-* La început se obțin identificatorii unici pentru cei doi utilizatori, pe baza numelor acestora. Apoi, funcția min_path este apelată pentru a calcula distanța cea mai scurtă dintre cei doi utilizatori.(Funcția min_path este cea realizată în cadrul laboratorului 7 de SDA, la care am fost adăugate mici modificări; comenatrii legate de funcționalitatea ei se găsesc în fișierul graph.h). Dacă există un drum între cei doi utilizatori, distanța este afișată. În caz contrar, se indică faptul că nu există o cale de la primul utilizator la cel de-al doilea.
+#### most_popular_friend
+* This function identifies and displays the most popular friend of a user (i.e., the friend with the most friends), based on the friend count of each friend of the specified user.
+* First, it retrieves the unique ID of the user based on their name. Then, it accesses the user’s friend list from the graph and initializes max variables (`max_num_friends`, `max_id`) to keep track of the friend with the most connections. The function iterates through each friend of the user, accessing each friend’s list of friends and counting their friend count using the `count_friends` function (for more details on this function, refer to `friends.h`).
+* For each iteration, if a friend has more friends than the current maximum (`max_num_friends`), they become the new most popular friend, and if there’s a tie, the friend with the smaller ID is chosen.
+* Finally, the function displays the most popular friend. If the user has the highest friend count or has an equal count with another user, it indicates that the user themselves is the most popular (as specified in the assignment prompt).
 
-### most_popular_friend
-* Această funcție identifică și afișează prietenul cel mai popular al unui utilizator(adică prietenul cu cei mai mulți prieteni), pe baza numărului de prieteni pe care îi are fiecare prieten al utilizatorului respectiv.
-* La început se obține identificatorul unic asociat utilizatorului primit ca parametru, utilizând numele acestuia. Se accesează lista de prieteni a utilizatorului din graf și se inițializează variabilele de maxim(max_num_friends, max_id) pentru a reține prietenul cu cei mai mulți prieteni. Funcția parcurge fiecare prieten din lista utilizatorului, accesând la rândul său lista de prieteni a fiecăruia și numărând câți prieteni are fiecare utilizând funcția count_friends(mai multe detalii despre implementarea acestei funcții se găsesc în fișierul friends.h).
-* La fiecare iterare, dacă un prieten are mai mulți prieteni decât maximul curent(max_num_friends), acesta devine noul prieten cel mai popular, iar în caz de egalitate, este ales prietenul cu ID-ul mai mic.
-* La final, funcția afișează prietenul cel mai popular, iar dacă utilizatorul are cei mai mulți prieteni sau are număr egal de prieteni cu un alt utilizator, iar ambii au cei mai mulți prieteni, se indică faptul că utilizatorul însuși este cel mai popular(această abordare a fost precizată în enunțul temei).
+---
 
-<br />
+### Task 2 - Posts and Reposts
 
-## Task 2 - Postări și reposturi
-* Acest task implică implementarea funcționalităților necesare pentru gestionarea postărilor și repostărilor dintr-o platformă de social media(crearea unei postări, repostarea unei postări sau a unei repostări, găsirea primului repost comun pentru două reposturi date, aprecierea unei postări, ștergerea unei postări, afișarea numărului de like-uri pentru o postare etc.).
-* În implementarea acestui task am folosit structurile de arbore generic împreună cu funcționalitățile acestuia implementate în fișierele generic_tree.c și generic_tree.h(mai multe detalii despre acestea se găsesc în fișierul generic_tree.h unde am explicat utilizarea lor).
+This task involves implementing the functionalities needed to manage posts and reposts on a social media platform (creating a post, reposting a post or a repost, finding the first common repost for two given reposts, liking a post, deleting a post, displaying the number of likes for a post, etc.).
+* For this task, generic tree structures and their functionalities were implemented in `generic_tree.c` and `generic_tree.h` (for more details, see `generic_tree.h`).
 
-### common_repost
-* Această funcție identifică primului repost comun între două reposturi ale aceleiași postări.
-* La început, funcția localizează arborele postării corespunzător ID-ului primit ca parametru(post_id). Apoi, se inițializează vectorii necesari pentru reprezentarea turului Eulerian și nivelurile fiecărui nod din arbore(am folosit metoda turului Eulerian pentru căutarea primului strămoș comun, metodă ce a fost explicată în cadrul cursului de SDA; pentru mai multe detalii despre funcționalitatea acestui algoritm exită comentarii în fișierul posts.h sau pe [linkul](https://www.infoarena.ro/problema/lca) prezentat la curs).
-* Se realizează reprezentarea turului Eulerian a arborelui postării și a vectorului de niveluri, folosind o metodă recursivă pentru traversarea arborelui. Apoi, se aplică algoritmul de căutare a celui mai mic strămoș comun pe baza turului Eulerian și a nivelurilor fiecărui nod, determinând astfel ID-ul primului repost comun între cele două reposturi date.
-* La final, după ce s-a găsit LCA, se eliberează memoria alocată anterior pentru vectorii Euler și nivel. 
+#### common_repost
+* This function identifies the first common repost between two reposts of the same post.
+* First, the function locates the tree of the post corresponding to the `post_id` parameter. Then, it initializes arrays for Eulerian tour representation and level vectors for each tree node (using the Eulerian tour method for lowest common ancestor (LCA) search, as discussed in SDA; see `posts.h` for comments or visit [link](https://www.infoarena.ro/problema/lca) from the course).
+* An Eulerian tour representation of the post tree and the level vector is generated using a recursive tree traversal. The LCA search algorithm then determines the ID of the first common repost.
+* Finally, after finding the LCA, the function releases memory previously allocated for the Euler and level arrays.
 
-### like_post
-* Această funcție este responsabilă pentru gestionarea acțiunilor de like sau unlike a postărilor și repostărilor.
-* La început, funcția caută arborele corespunzător postării identificate prin post_id în structura post_manager. Dacă postarea nu există, funcția se încheie.
-* În caz contrar, funcția determină ID-ul utilizatorului care dă like-ul și titlul postării asupra căruia se efectuează acțiunea(dacă este cazul).
-* În funcție de existența sau absența parametrului repost_id, funcția adaugă sau elimină like-ul utilizatorului la nivelul postării sau a repostării.
-* Se caută în lista de like-uri a postării sau repostării ID-ul utilizatorului, iar dacă utilizatorul a dat deja like la respectiva postare sau repostare, se realizează eliminarea acestui like, iar dacă nu, se adaugă(în esență, se elimină sau se adaugă un nod în listă utilizând funcții special implementate în acest sens).
-* De asemenea, funcția ajustează numărul total de like-uri asociate postării sau repostării(schimbă valoarea variabilei n_likes), iar la final afișează un mesaj corespunzător.
+#### like_post
+* This function handles liking or unliking posts and reposts.
+* It first locates the tree corresponding to the post with `post_id` in the `post_manager` structure. If the post doesn’t exist, the function ends.
+* Otherwise, it retrieves the ID of the user liking the post and the title of the post if applicable.
+* Based on the presence or absence of the `repost_id` parameter, the function adds or removes the user's like on the post or repost.
+* It searches the post’s or repost’s like list for the user ID, removing the like if the user already liked it or adding it if not (using functions specifically created for this purpose).
+* The function also updates the total like count (`n_likes`) and displays a corresponding message.
 
-### ratio
-* Această funcție are rolul de a găsi postarea sau repostarea cu cel mai mare număr de like-uri.
-* La început, funcția caută arborele corespunzător postării cu ID-ul post_id, primit ca parametru, în structura post_manager. Dacă postarea nu există, funcția se încheie.
-* Apoi, se inițializează variabile pentru a stoca numărul maxim de like-uri și ID-ul postării sau repostării cu cele mai multe like-uri(max_likes, max_likes_id), ce au în primă fază valorile postării originale.
-* Se traversează recursiv arborele pentru a găsi nodul cu cel mai mare număr de like-uri și se actualizează variabilele de maxim la fiecare iterație, iar în caz de egalitate se alege postarea/repostarea cu Id-ul mai mic(acest lucru se realizează cu ajutorul funcției *find_max_likes_recursively* mai multe detalii despre această funcție se găsesc în fișierul posts.h).
-* La final, se compară ID-ul postării cu cele mai multe like-uri cu ID-ul postării originale, iar dacă postarea originală are și ea max_likes, se alege această postare ca fiind cea cu cele mai multe like-uri, indiferent de ID găsit până atunci pentru cea mai apreciată postare(această abordare este precizată în enunțul temei) și se afișează un mesaj corespunzător rezultatului obținut.
+#### ratio
+* This function identifies the post or repost with the highest number of likes.
+* It first locates the post tree for the given `post_id` in the `post_manager`. If the post doesn’t exist, the function ends.
+* Then, it initializes variables to store the maximum number of likes and the ID of the post or repost with the most likes (`max_likes`, `max_likes_id`), initially set to the original post values.
+* The tree is traversed recursively to find the node with the most likes, updating the max variables on each iteration. In case of a tie, the post/repost with the smaller ID is chosen (implemented with `find_max_likes_recursively`; see `posts.h`).
+* Finally, the function compares the ID of the most liked post with the original post ID, and if the original post also has `max_likes`, it is selected as the most liked post regardless of other IDs found, as specified in the assignment prompt.
 
-<br />
+---
 
-## Task 3 - Social Media
-* Acest task implică implementarea unor funcționalități pentru gestionarea și afișarea postărilor și interacțiunilor într-o rețea socială
-(afișarea celor mai recente postări făcute de un utilizator și prietenii săi, afișarea tuturor postărilor și repostărilor unui utilizator, afășarea tuturor prietenilor unui utilizator care au dat repost la postarea cu un anumit id și afișarea celui mai mare grup de prieteni în care se află un anumit utilizator).
+### Task 3 - Social Media
 
-### common_groups
-* Această funcție are scopul de a identifica și afișa cea mai mare clică de prieteni(în care se ală și utilizatorul primit ca parametru) formată pe baza modificării unui graf dintre un utilizator și prietenii săi.
-* Se obține user_id pentru numele de utilizator dat, folosind funcția get_user_id și se accesează lista de prieteni a utilizatorului, utilizând funcția lg_get_neighbours.
-* Se inițializează un vector frequency pentru a asigura faptul că doar prietenii utilizatorului sunt luați în considerare în calcule. De asemenea, se alocă memorie pentru un vector de prieteni (friends_vector), care va stoca informații despre fiecare prieten, inclusiv ID-ul și numărul de conexiuni cu celalte persoane din graf(n_connections). 
-* Inițializăm variabila n_friends care stochează numărul total de persoane din graf case se actualizează pe măsură ce se iterează prin lista de prieteni.
-* Se traversează lista de prieteni a utilizatorului, adăugând ID-urile acestora în friends_vector și marcându-i în vectorul frequency. 
-Apoi, se calculează numărul de conexiuni pentru fiecare persoană din friends_vector astfel: Pentru fiecare prieten din friends_vector, funcția preia lista prietenilor asociată acestuia și numără conexiunile cu prietenii utilizatorului. 
-* După aceea, friends_vector este sortat în ordine descrescătoare în funcție de numărul de conexiuni, utilizând funcția sort_friends_by_connections(mai multe detalii despre această funcție se găsesc în fișierul feed.h).
-* Pentru calcularea clicii se iterează în ordine descrescătoare prin friends_vector; pentru fiecare element se verifică dacă are un număr de conexiuni necesar pentru a face parte din clică. Dacă această condiție este îndeplinită nu mai continuăm iterarea deoarece, fiind ordonați după numărul de conexiuni, restul prietenilor îndeplinesc cu siguranță condiția. În caz contrar, considerăm prietenul ca fiind eliminat din clică, recalculăm numărul de conexiuni și resortăm vectorul(de fiecare dată când un prieten e eliminat din vector conexiunile dintre restul persoanelor din vector și el trebuie eliminate).
-* La final sortăm vectorul friends_vector în ordine crescătoare după ID folosind funcția sort_friends_by_id(mai multe detalii despre această funcție se găsesc în fișierul feed.h) și afișăm persoanele rămase în clică.
+This task involves implementing functionalities to manage and display posts and interactions in a social network (displaying the most recent posts by a user and their friends, showing all posts and reposts of a user, displaying all friends who reposted a given post, and displaying the largest group of friends in which a user is present).
 
-<br />
+#### common_groups
+* This function identifies and displays the largest clique of friends (including the specified user) formed by modifying the graph of the user and their friends.
+* The user_id is obtained for the given username using `get_user_id`, and the user’s friend list is accessed using `lg_get_neighbours`.
+* A frequency vector is initialized to ensure that only the user’s friends are considered. Memory is also allocated for a `friends_vector` that stores each friend’s ID and connection count with others (`n_connections`).
+* We initialize `n_friends` for the total graph count and update it while iterating through the friend list.
+* The user’s friend list is iterated to add IDs to `friends_vector`, marking them in `frequency`.
+* The `friends_vector` is then sorted in descending order by connections using `sort_friends_by_connections` (see `feed.h` for details).
+* The clique is calculated by iterating through `friends_vector` in descending order; each friend’s connection count is checked to see if they meet the clique condition.
+* The `friends_vector` is finally sorted by ID using `sort_friends_by_id` (see `feed.h`) and displays the remaining clique members.
 
-## Comentarii asupra temei:
+---
 
-### Ce ați învățat din realizarea acestei teme?
+## Assignment Comments:
 
-* Cum funcționează în background o platformă de social media.
+### What did you learn from this assignment?
 
-* Să realizăm o mai bună înțelegere și implementare a unor structuri de date(*Grafuri, Arbori generici*).
+* How the backend of a social media platform functions.
+* Better understanding and implementation of data structures (Graphs, Generic Trees).
+* Understanding and implementing an optimal LCA algorithm for trees using Euler representation.
 
-* Să înțelegem și să implementăm un algoritm optim de LCA pentru arbori care folosește reprezentarea Euler a acestuia.
+---
 
-<br />
+## Note:
 
-<h2 style="color: red; font-weight: bold;">Observație:</h2>
-
-### Comentariile Doxygen ale structurilor și funcțiilor implementate sunt incluse în fișierele ".h". Am ales această abordare pentru a menține codul cât mai lizibil posibil.
-
-
-
-
+### Doxygen comments for the implemented structures and functions are included in the ".h" files for readability.
